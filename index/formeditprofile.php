@@ -1,83 +1,60 @@
 <?php include 'adminPermission.inc'; ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Form</title>
-	<link rel="stylesheet" type="text/css" href="css.css">
-</head>
-<body>
-<div class="box">
-	<a href="logout.php">logout</a>
+<div class="login">
 <h1> Edit Profile </h1>
 <fieldset>
 	<legend>Person Details</legend>
+	
 	<?php
-	$pdo = new PDO ('mysql:host=localhost;dbname=forumdiscussion','root','');
+	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
 	$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$query = $pdo->prepare('SELECT * FROM user WHERE id=:id');
 	$query->bindValue(':id', $_SESSION['idUser']);
 	$query->execute();
 	$data = $query->fetch();?>
-	<form name="myForm" action="editprofile.php" method="POST">
+	
+	<form name="myForm" action="?pageeditprofile" method="POST">
 		<input type="number" name="id" hidden value="<?php echo $data['id'];?>">
-		<table>
-		<tr>
-			<td class="right"><label>Username</label></td>
-			<td><input class="field" type="text" name="username" size="31" value="<?php echo $data['username']?>"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['username']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Fullname</label></td>
-			<td><input class="field" type="text" name="fullname" size="31" value="<?php echo $data['fullname']?>"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['fullname']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Email</label></td>
-			<td><input class="field" type="text" name="email" size="31" value="<?php echo $data['email']?>"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['email']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Nomor Telepon</label></td>
-			<td><input class="field" type="text" name="nomor" size="31" value="<?php echo $data['telp']?>"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['nomor']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Jenis Kelamin</label></td>
-			<td><input class="field" type="radio" name="gender" value="male" <?php if($data['gender'] == 'male') echo "checked"?>>Laki - Laki
-			<input class="field" type="radio" name="gender" value="female" <?php if($data['gender'] == 'female') echo "checked"?>>Perempuan</td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['gender']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Alamat</label></td>
-			<td><input class="field" type="text" name="alamat" size="31" value="<?php echo $data['alamat']?>"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['alamat']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Type User</label></td>
-			<td><select name="type">
-				<option value="expert">Expert</option>
-				<option value="client">Client</option>
-			</select>
-			</td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['type']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Masukan Password Lama</label></td>
-			<td><input class="field" type="password" name="password" size="31"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['password']?></td>
-		</tr>
-		<tr>
-			<td class="right"><label>Konfirm Password</label></td>
-			<td><input class="field" type="password" name="password2" size="31"></td>
-			<td class="error"><?php if(isset($_POST['submit'])) echo $errors['password2']?></td>
-		</tr>
-		<tr>
-			<td colspan="3"><input type="submit" value="Update" name="submit" class="button"> <input type="reset" name="reset" value="Reset" class="button"></td>
-		</tr>
-		</table>
-	</form>
+		<label>Username</label><input class="input-control" type="text" name="username" size="31" value="<?php echo $data['username']?>">
+		<?php if(isset($_POST['submit'])) echo $errors['username']?>
+		
+		<label>Fullname</label>
+		<input class="input-control" type="text" name="fullname" size="31" value="<?php echo $data['fullname']?>">
+		<?php if(isset($_POST['submit'])) echo $errors['fullname']?>
+		
+		<label>Email</label> 
+		<input class="input-control" type="text" name="email" size="31" value="<?php echo $data['email']?>">
+		<?php if(isset($_POST['submit'])) echo $errors['email']?>
+
+		<label>Nomor Telepon</label>
+		<input class="input-control" type="text" name="nomor" size="31" value="<?php echo $data['telp']?>">
+		<?php if(isset($_POST['submit'])) echo $errors['nomor']?>
+
+		<label>Jenis Kelamin</label> <br>
+		
+		<input type="radio" name="gender" value="male" <?php if($data['gender'] == 'male') echo "checked"?>>Laki - Laki
+		
+		<input type="radio" name="gender" value="female" <?php if($data['gender'] == 'female') echo "checked"?>>Perempuan
+		<?php if(isset($_POST['submit'])) echo $errors['gender']?> 
+		<br>
+		<label>Alamat</label> 
+		<input class="input-control" type="text" name="alamat" size="31" value="<?php echo $data['alamat']?>">
+		<?php if(isset($_POST['submit'])) echo $errors['alamat']?>
+
+		<label>Type User</label>
+		<select class="input-control" name="type">
+			<option value="expert">Expert</option>
+			<option value="client">Client</option>
+		</select>
+		<?php if(isset($_POST['submit'])) echo $errors['type']?> 
+		
+		<label>Masukan Password Lama</label>
+		<input class="input-control" type="password" name="password" size="31">
+		<?php if(isset($_POST['submit'])) echo $errors['password']?>
+		
+		<label>Konfirm Password</label>
+		<input class="input-control" type="password" name="password2" size="31">
+		<?php if(isset($_POST['submit'])) echo $errors['password2']?>
+		
+		<input type="submit" value="Update" name="submit" class="button"> <input type="reset" name="reset" value="Reset" class="button">
 </fieldset>
 </div>
-</body>
-</html>

@@ -21,7 +21,7 @@ if (isset($_POST['submit']))
 	 	}
 	 	else
 	 	{	
-	 	$pdo = new PDO ('mysql:host=localhost;dbname=forumdiscussion','root','');
+	 	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
 		$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $pdo->prepare('SELECT * FROM user WHERE id=:id and password=:password');
 		$query->bindValue(':id', $_POST['id']);
