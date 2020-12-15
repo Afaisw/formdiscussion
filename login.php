@@ -24,11 +24,10 @@
 					}
 				}
 			?>
-				<label>Username </label>
-				<input class="input-control" type="text" name="username" size="31"/>
-				<label>Password </label>
-				<input class="input-control" type="password" name="password" size="31"/>
+				<input class="input-control" type="text" name="username" placeholder="Username" /><br>
+				<input class="input-control" type="password" name="password" placeholder="Password" /><br>
+				belum memiliki akun ? <a href="?page=register">klik</a><br>
 				<input class="btn" type="submit" value="Login" name="login"/>
-				belum memiliki akun ? <a href="?page=register">klik</a>
+				
 		</div>
 </form>

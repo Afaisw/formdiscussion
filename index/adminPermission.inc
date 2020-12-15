@@ -5,7 +5,7 @@
 	{ 
 		//user akan diarahkan ke halaman login untuk authorization
 		//header("Location: http://localhost/login.php");
-		header("Location: ../login.php");
+		header("Location: ../index.php?page=login");
 		exit();
 	}
 ?>
