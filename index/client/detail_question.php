@@ -1,5 +1,5 @@
 <?php
-$id = $_GET['id'];
+$id = $_POST['id'];
 if (isset($_POST['submit'])) {
 	require 'validate2.inc';
 	validateWajib($errors, $_POST, 'topik');
@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 		include 'formeditquestion.php';
 	} else {
 		$db = new PDO('mysql:host=localhost;dbname=forum', "root", "");
-		$state = $db->prepare("update question set id_topik=:id_topik , isi=:isi where id_question=:id_question");
+		$state = $db->prepare("update question set id_topic=:id_topik , isi=:isi where id_question=:id_question");
 		$state->bindValue(':id_topik', $_POST['topik']);
 		$state->bindValue(':id_question', $_POST['id']);
 		$state->bindValue(':isi', $_POST['isi']);
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
 	$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$query = $pdo->prepare("SELECT * FROM answer where id_question =:id");
-	$query->bindValue(':id', $_GET['id']);
+	$query->bindValue(':id', $_POST['id']);
 	$query->execute();
 	$data = $query->fetchAll();
 	?>

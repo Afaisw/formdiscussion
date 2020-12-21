@@ -39,8 +39,13 @@
 					break;
 				case 'detailquestion':
 					include 'client/detail_question.php';
+					break;
 				case 'all_question':
 					include 'expert/all_question.php';
+					break;
+				case 'reply_quest':
+					include 'expert/reply_quest.php';
+					break;
 				default:
 					# code...
 					break;

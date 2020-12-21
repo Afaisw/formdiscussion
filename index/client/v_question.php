@@ -28,12 +28,12 @@ if (isset($_POST['submit'])) {
 	include 'adminPermission.inc'; 
 	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
 	$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$query = $pdo->prepare('SELECT * FROM question,topik WHERE question.id_topik = topik.id_topik and id_user=:id');
+	$query = $pdo->prepare('SELECT * FROM question,topik WHERE question.id_topic = topik.id_topik and id_user=:id');
 	$query->bindValue(':id', $_SESSION['idUser']);
 	$query->execute();
 	$data = $query->fetchAll();
-	?>
-	<?php foreach ($data as $question) { ?>
+	
+	foreach ($data as $question) { ?>
 	<a href="?page=detailquestion&id=<?=$question['id_question']; ?>" class="question">
 		<li>
 			<div class="topik"><?php echo $question['judul']?></div>

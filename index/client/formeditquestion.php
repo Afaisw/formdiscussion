@@ -1,7 +1,7 @@
 <?php
 $pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
 $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$query = $pdo->prepare('SELECT * FROM question,topik WHERE question.id_topik = topik.id_topik and id_user=:id and id_question=:id_question');
+$query = $pdo->prepare('SELECT * FROM question,topik WHERE question.id_topic = topik.id_topik and id_user=:id and id_question=:id_question');
 $query->bindValue(':id', $_SESSION['idUser']);
 $query->bindValue(':id_question', $_GET['id']);
 $query->execute();
