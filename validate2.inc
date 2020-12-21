@@ -41,17 +41,16 @@ function validateNumerik(&$errors, $field_list, $field_name)
 	}
 function validateAlfanumerik(&$errors, $field_list, $field_name)
 	{
-		$pattern2 = "/^[a-zA-Z'-]+[0-9]{1,4}[a-zA-Z'-]{0,2}+$/";
-		$length = strlen((string)$field_list[$field_name]);
-		if (!isset($field_list[$field_name]) || empty($field_list[$field_name])){
+		$pattern = "/.{8,}/";
+		$pattern1 = "/(?=.*[a-zA-Z])(?=.*[0-9])/";
+		if (!isset($field_list[$field_name]) || empty($field_list[$field_name]))
 			$errors[$field_name] = 'field is required';
-		}
-		else if (!preg_match($pattern2, $field_list[$field_name])) {
-			$errors[$field_name] = 'Must Contain Alphabets & Numerics';
-		}
-		else if ($length < 4){
-			$errors[$field_name] = 'password is less than 4 characters long';
-		}
+		
+		else if(!preg_match($pattern, $field_list[$field_name]))
+			$errors[$field_name] = 'password is less than 8 characters long';
+		
+		else if(!preg_match($pattern1, $field_list[$field_name]))
+			$errors[$field_name] = 'must contain alphabets & numerics';
 	}
 function validateConfirm(&$errors, $field_list, $field_name1, $field_name2)
 	{
