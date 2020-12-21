@@ -12,7 +12,7 @@
 		<ul>
 			<li><a href="logout.php">Logout</a></li>
 			<?php if ($_SESSION['type'] == 'expert') {?>
-				<li><a href="#">Lihat Pertanyaan</a></li>
+				<li><a href="?page=all_question">Lihat Pertanyaan</a></li>
 			<?php } ?>
 			<?php if ($_SESSION['type'] == 'client') {?>
 				<li><a href="?page=v_question">Diskusi</a></li>
@@ -39,6 +39,8 @@
 					break;
 				case 'detailquestion':
 					include 'client/detail_question.php';
+				case 'all_question':
+					include 'expert/all_question.php';
 				default:
 					# code...
 					break;
