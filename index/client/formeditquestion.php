@@ -3,8 +3,8 @@ $query = $db->prepare('SELECT * FROM tb_user, tb_question, tb_topik WHERE tb_que
 $query->bindValue(':id_question', $_GET['id']);
 $query->execute();
 $data = $query->fetch();
-if($_SESSION['idUser'] == $data['ID_USER']) {?> <!-- kondisi apakah user yang sedang login sesuai dengan yang menanyakan atau tidak -->
-<form action="#" method="post"> <!-- jika sesuai maka pertanyaan bisa di edit -->
+?> 
+<form action="#" method="post">
 	<?php 
 		$query = $db->prepare('SELECT * FROM tb_topik');
 		$query->execute();
@@ -23,10 +23,3 @@ if($_SESSION['idUser'] == $data['ID_USER']) {?> <!-- kondisi apakah user yang se
 		<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
 		<input type="submit" name="submit" value="Edit Pertanyaan">
 </form>
-<?php } else { ?> <!-- jika tidak maka hanya menampilkan saja -->
-<li>
-	<h2><?php echo $data['FULLNAME']?></h2>
-	<div class="isi"><?php echo $data['PERTANYAAN'] ?></div>
-	<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
-</li>
-<?php } ?>

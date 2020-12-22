@@ -1,39 +1,26 @@
 <ul>
 	<?php
-	include 'adminPermission.inc'; 
-	$id = $_GET['id']; //inisialisasi variable id 
-	if (isset($_POST['submit'])) {
-		require '../config/validate.inc';
-		validateWajib($errors, $_POST, 'topik');
-		validateWajib($errors, $_POST, 'isi');
-		if($errors){
-			include 'formeditquestion.php';
-		} else {
-			$state = $db->prepare("update tb_question set ID_TOPIK=:id_topik , PERTANYAAN=:isi where ID_QUESTION=:id_question"); //mengupdate data jika sudah tervalidasi dengan benar
-			$state->bindValue(':id_topik', $_POST['topik']);
-			$state->bindValue(':id_question', $id);
-			$state->bindValue(':isi', $_POST['isi']);
-			$state->execute();
-			if ($state)
-			{
-				echo "<script>alert('Pertanyaan Berhasil Diedit');location.href='?page=v_question';</script>"; //redirect
-			} else {
-				echo "<script>alert('Pertanyaan Gagal Diedit');location.href='?page=v_question';</script>";
-			}	
-		}
-	} else {
-		include 'formeditquestion.php';
-	} 	
+	$query = $db->prepare('SELECT * FROM tb_user, tb_question, tb_topik WHERE tb_question.ID_TOPIK = tb_topik.ID_TOPIK and tb_user.ID_USER = tb_question.ID_USER and ID_QUESTION=:id_question'); //select pertanyaan yang sudah diklik di link sebelumnya
+	$query->bindValue(':id_question', $_GET['id']);
+	$query->execute();
+	$data = $query->fetch(); ?>
+	<li>
+		<h2><?php echo $data['FULLNAME']?></h2>
+		<div class="isi"><?php echo $data['PERTANYAAN'] ?></div>
+		<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
+		<a href="?page=editquestion&id=<?=$data['ID_QUESTION']; ?>">Edit</a>
+	</li>
+	<?php
 	$query = $db->prepare("SELECT * FROM tb_user,tb_answer where tb_user.ID_USER=tb_answer.ID_USER and ID_QUESTION =:id"); //select data pertanyaan yang sesuai dengan yang diklik sebelumnya
-	$query->bindValue(':id', $id);
+	$query->bindValue(':id', $_GET['id']);
 	$query->execute();
 	$data = $query->fetchAll();
 	?>
 	<?php foreach ($data as $answer) { ?>
 		<li>
-			<h2><?php echo $row['FULLNAME']?></h2>
-			<div class="isi"><?php echo $question['JAWABAN'] ?></div>
-			<div class="tanggal"><?php echo $question['TANGGAL_JAWABAN'] ?></div>
+			<h2><?php echo $answer['FULLNAME']?></h2>
+			<div class="isi"><?php echo $answer['JAWABAN'] ?></div>
+			<div class="tanggal"><?php echo $answer['TANGGAL_JAWABAN'] ?></div>
 		</li>
 	<?php } ?>
 </ul>
