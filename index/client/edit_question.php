@@ -2,7 +2,7 @@
 	include 'adminPermission.inc'; 
 	$id = $_GET['id']; //inisialisasi variable id 
 	if (isset($_POST['submit'])) {
-		require '../config/validate.inc';
+		require '../config/validate.inc'; //validasi field
 		validateWajib($errors, $_POST, 'topik');
 		validateWajib($errors, $_POST, 'isi');
 		if($errors){

@@ -1,4 +1,4 @@
-<?php
+<?php //menampilkan data sebelum diedit
 $query = $db->prepare('SELECT * FROM tb_user, tb_question, tb_topik WHERE tb_question.ID_TOPIK = tb_topik.ID_TOPIK and tb_user.ID_USER = tb_question.ID_USER and ID_QUESTION=:id_question'); //select pertanyaan yang sudah diklik di link sebelumnya
 $query->bindValue(':id_question', $_GET['id']);
 $query->execute();
@@ -6,7 +6,7 @@ $data = $query->fetch();
 ?> 
 <form action="#" method="post">
 	<?php 
-		$query = $db->prepare('SELECT * FROM tb_topik');
+		$query = $db->prepare('SELECT * FROM tb_topik'); //menampilkan seluruh topik untuk dipilih
 		$query->execute();
 		$topiks = $query->fetchAll();
 		?>
