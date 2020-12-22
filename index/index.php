@@ -57,6 +57,9 @@ error_reporting(0); //menonaktifkan error log
 				case 'detailquestion':
 					include 'client/detail_question.php';
 					break;
+				case 'editquestion':
+					include 'client/edit_question.php';
+					break;
 				case 'clientallquestion':
 					include 'client/v_all_question.php';
 					break;
