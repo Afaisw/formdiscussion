@@ -11,7 +11,7 @@
         echo "<p>{$row['pertanyaan']}</p>";
     }
 	//menampilkan jawaban sebelumnya
-    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban, a.id_answer, a.id_user FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user');
+    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban, a.id_answer, a.id_user FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user ORDER BY a.tanggal_jawaban');
     $query->bindValue(':id', $_GET['id']);
     $query->execute();
 	$data = $query->fetchAll();
