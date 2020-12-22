@@ -7,7 +7,7 @@ error_reporting(0); //menonaktifkan error log
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Admin</title>
 	<link rel="stylesheet" type="text/css" href="../asset/css.css"> <!-- mengimport css -->
 </head>
 <script type="text/javascript">

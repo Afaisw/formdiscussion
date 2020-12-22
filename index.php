@@ -6,7 +6,7 @@ error_reporting(0); //mematikan error log
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="asset/css.css">
 </head>
 <body>
