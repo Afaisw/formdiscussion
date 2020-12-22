@@ -1,7 +1,7 @@
 <ul>
 	<?php 
 	include 'adminPermission.inc'; 
-	$statement = $db->prepare("SELECT * FROM tb_user,tb_question,tb_topik WHERE tb_user.ID_USER=tb_question.ID_USER AND tb_topik.ID_TOPIK=tb_question.ID_TOPIK"); //menampilkan seluruh pertanyaan
+	$statement = $db->prepare("SELECT * FROM tb_user,tb_question,tb_topik WHERE tb_user.ID_USER=tb_question.ID_USER AND tb_topik.ID_TOPIK=tb_question.ID_TOPIK order by TANGGAL_DIBUAT_QUESTION"); //menampilkan seluruh pertanyaan
     $statement->execute();	
 	foreach ($statement as $row) { ?>
 	<a href="?page=detailquestion&id=<?=$row['ID_QUESTION']; ?>" class="question"> <!-- menampilkan ID pertanyaan yang sudah diselect -->

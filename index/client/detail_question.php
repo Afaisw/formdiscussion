@@ -12,7 +12,7 @@
 	</li>
 	<!-- menampilkan semua jawaban yang sudah dijawab oleh user terhadap pertanyaan diatas -->
 	<?php
-	$query = $db->prepare("SELECT * FROM tb_user,tb_answer where tb_user.ID_USER=tb_answer.ID_USER and ID_QUESTION =:id"); //select data pertanyaan yang sesuai dengan yang diklik sebelumnya
+	$query = $db->prepare("SELECT * FROM tb_user,tb_answer where tb_user.ID_USER=tb_answer.ID_USER and ID_QUESTION =:id order by TANGGAL_JAWABAN"); //select data pertanyaan yang sesuai dengan yang diklik sebelumnya
 	$query->bindValue(':id', $_GET['id']);
 	$query->execute();
 	$data = $query->fetchAll();
