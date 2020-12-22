@@ -11,8 +11,9 @@
         echo "<p>{$row['pertanyaan']}</p>";
     }
 
-    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=b.id_question AND a.id_user=c.id_user');
-	$query->execute();
+    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user');
+    $query->bindValue(':id', $_GET['id']);
+    $query->execute();
 	$data = $query->fetchAll();
 	
 	foreach ($data as $question) {

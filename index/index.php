@@ -20,6 +20,7 @@ error_reporting(0);
 			<li><a href="logout.php">Logout</a></li>
 			<?php if ($_SESSION['type'] == 'expert') {?>
 				<li><a href="?page=all_question">Lihat Pertanyaan</a></li>
+				<li><a href="?page=discuss">Diskusi Saya</a></li>
 			<?php } ?>
 			<?php if ($_SESSION['type'] == 'client') {?>
 				<li><a href="?page=v_question">Diskusi</a></li>
@@ -64,6 +65,9 @@ error_reporting(0);
 					break;
 				case 'reply_quest':
 					include 'expert/reply_quest.php';
+					break;
+				case 'discuss':
+					include 'expert/discuss.php';
 					break;
 				default:
 					# code...
