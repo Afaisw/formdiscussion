@@ -1,17 +1,14 @@
-<?php
-try {
-  // buat koneksi dengan database
-  $db = new PDO('mysql:host=localhost;dbname=forumdiscussion', "root", "");
-  
-  // set error mode
-  $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION );
-  
-  // hapus koneksi
-  $db = null;
-}
-catch (PDOException $e) {
-  // tampilkan pesan kesalahan jika koneksi gagal
-  print "Koneksi atau query bermasalah: " . $e->getMessage() . "<br/>";
-  die();
+<?php 
+function pdo_connect_mysql() {
+    $DATABASE_HOST = 'localhost';
+    $DATABASE_USER = 'root';
+    $DATABASE_PASS = '';
+    $DATABASE_NAME = 'forum';
+    try {
+    	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
+    } catch (PDOException $exception) {
+    	// If there is an error with the connection, stop the script and display the error.
+    	exit('Failed to connect to database!');
+    }
 }
 ?>

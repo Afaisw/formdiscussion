@@ -1,3 +1,8 @@
+<?php 
+require_once('config/koneksi.php');
+$db = pdo_connect_mysql();
+/*error_reporting(0);*/
+?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -5,38 +5,36 @@
 	<legend>Person Details</legend>
 	
 	<?php
-	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
-	$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$query = $pdo->prepare('SELECT * FROM user WHERE id=:id');
+	$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
 	$query->bindValue(':id', $_SESSION['idUser']);
 	$query->execute();
 	$data = $query->fetch();?>
 	
-	<form name="myForm" action="?pageeditprofile" method="POST">
-		<input type="number" name="id" hidden value="<?php echo $data['id'];?>">
+	<form name="myForm" action="?page=editprofile" method="POST">
+		<input type="number" name="id" hidden value="<?php echo $data['ID_USER'];?>">
 		<label>Username</label><br>
-		<input class="input-control" type="text" name="username" size="31" value="<?php echo $data['username']?>">
+		<input class="input-control" type="text" name="username" size="31" value="<?php echo $data['USERNAME']?>">
 		<?php if(isset($_POST['submit'])) echo $errors['username']?>
 		<br>
 		<label>Fullname</label><br>
-		<input class="input-control" type="text" name="fullname" size="31" value="<?php echo $data['fullname']?>">
+		<input class="input-control" type="text" name="fullname" size="31" value="<?php echo $data['FULLNAME']?>">
 		<?php if(isset($_POST['submit'])) echo $errors['fullname']?>
 		<br>
 		<label>Email</label><br>
-		<input class="input-control" type="text" name="email" size="31" value="<?php echo $data['email']?>">
+		<input class="input-control" type="text" name="email" size="31" value="<?php echo $data['EMAIL']?>">
 		<?php if(isset($_POST['submit'])) echo $errors['email']?>
 		<br>
 		<label>Nomor Telepon</label><br>
-		<input class="input-control" type="text" name="nomor" size="31" value="<?php echo $data['telp']?>">
+		<input class="input-control" type="text" name="nomor" size="31" value="<?php echo $data['TELP']?>">
 		<?php if(isset($_POST['submit'])) echo $errors['nomor']?>
 		<br>
 		<label>Jenis Kelamin</label> <br>
-		<input type="radio" name="gender" value="male" <?php if($data['gender'] == 'male') echo "checked"?>>Laki - Laki
-		<input type="radio" name="gender" value="female" <?php if($data['gender'] == 'female') echo "checked"?>>Perempuan
+		<input type="radio" name="gender" value="male" <?php if($data['GENDER'] == 'male') echo "checked"?>>Laki - Laki
+		<input type="radio" name="gender" value="female" <?php if($data['GENDER'] == 'female') echo "checked"?>>Perempuan
 		<?php if(isset($_POST['submit'])) echo $errors['gender']?> 
 		<br>
 		<label>Alamat</label> <br>
-		<input class="input-control" type="text" name="alamat" size="31" value="<?php echo $data['alamat']?>">
+		<input class="input-control" type="text" name="alamat" size="31" value="<?php echo $data['ALAMAT']?>">
 		<?php if(isset($_POST['submit'])) echo $errors['alamat']?>
 		<br>
 		<label>Type User</label><br>

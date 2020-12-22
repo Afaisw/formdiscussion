@@ -3,40 +3,38 @@ include 'adminPermission.inc';
 $errors = array();
 if (isset($_POST['submit']))
 	{
-		require 'validate2.inc';
-	 	validateAlfanumerik($errors, $_POST, 'passwordlama');
-	 	validateAlfanumerik($errors, $_POST, 'passwordbaru');
-	 	validateConfirm($errors, $_POST, 'passwordbaru', 'password2');
-	 	if ($errors)
+	require '../config/validate.inc';
+	validateAlfanumerik($errors, $_POST, 'passwordlama');
+	validateAlfanumerik($errors, $_POST, 'passwordbaru');
+	validateConfirm($errors, $_POST, 'passwordbaru', 'password2');
+	if ($errors)
 		{
 	 // tampilkan kembali form
-			include 'formgantipassword.php';
+		include 'formgantipassword.php';
 	 	}
-	 	else
+	else
 	 	{	
-	 	$pdo = new PDO ('mysql:host=localhost;dbname=forumdiscussion','root','');
-		$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $pdo->prepare('SELECT * FROM user WHERE id=:id and password=:passwordlama');
-		$query->bindValue(':id', $_POST['id']);
-		$query->bindValue(':passwordlama', md5($_POST['passwordlama']));
+	 	$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
+		$query->bindValue(':id', $_SESSION['idUser']);
 		$query->execute();
 		$data = $query->fetch();
-		if ($data['password'] == md5($_POST['passwordlama']))
+		if ($data['PASSWORD'] == hash("sha256",$_POST['passwordlama']))
 			{
-			$state = $pdo->prepare("update user set password:=passwordbaru where id=:id");
-			$state->bindValue(':id', $_POST['id']);
-			$state->bindValue(':passwordbaru', md5($_POST['passwordbaru']));
+			$state = $db->prepare("update tb_user set PASSWORD:=SHA2(:passwordbaru,0) where ID_USER=:id");
+			$state->bindValue(':passwordbaru', $_POST['passwordbaru']);
+			$state->bindValue(':id', $_SESSION['idUser']);
 			$state->execute();	
 			if ($state)
 				{
-					echo "<script>alert('Password berhasil di update !');location.href='gantipassword.php';</script>";
+				echo "<script>alert('Password Berhasil di update');location.href='?page=changepassword';</script>";
 				}
-			}else {
-				echo "<script>alert('password Salah !');location.href='gantipassword.php';</script>";
-			}	
-	 	}
+		}else {
+			echo "<script>alert('Password salah');location.href='?page=changepassword';</script>";
+		}	
 	}
-else
+}
+else{
 	// tampilkan kembali form
 	include 'formgantipassword.php';
+}
 ?> 

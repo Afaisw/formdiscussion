@@ -1,9 +1,9 @@
 <?php
-error_reporting(0);
 $errors = array();
 if (isset($_POST['submit']))
 	{
-		require 'validate2.inc';
+		//validasi data yang diinput
+		require 'config/validate.inc';
 	 	validateAlfabet($errors, $_POST, 'username');
 	 	validateAlfabet($errors, $_POST, 'fullname');
 	 	validateEmail($errors, $_POST, 'email');
@@ -14,15 +14,15 @@ if (isset($_POST['submit']))
 	 	validateWajib($errors, $_POST, 'tgl');
 	 	validateAlfanumerik($errors, $_POST, 'password');
 	 	validateConfirm($errors, $_POST, 'password', 'password2');
-	 	if ($errors)
+	 	if ($errors) //jika ada error / field yang tidak sesuai dengan validasi
 		{
-	 // tampilkan kembali form
-			include 'form.php';
+	 	// tampilkan kembali form
+			include 'formregister.php';
 	 	}
 	 	else
-	 	{	
-	 	$db = new PDO('mysql:host=localhost;dbname=forum', "root", "");
-		$state = $db->prepare("insert into user values (null, :username, :fullname, :email, :telp, :gender, :alamat, :user_type, :tanggal_lahir, SHA2(:password,0))");
+	 	{
+		//jika field sudah benar maka akan diinput ke database
+		$state = $db->prepare("insert into tb_user values (null, :username, :fullname, :email, :telp, :gender, :alamat, :user_type, :tanggal_lahir, SHA2(:password,0))");
 		$state->bindValue(':username', $_POST['username']);
 		$state->bindValue(':fullname', $_POST['fullname']);
 		$state->bindValue(':email', $_POST['email']);
@@ -35,6 +35,7 @@ if (isset($_POST['submit']))
 		$state->execute();
 		if ($state)
 			{
+			// akan memunculkan notif dan direct ke lokasi yang di tuju
 			echo "<script>alert('Selamat Anda Sudah Terdaftar ! Silahkan Log In');location.href='?page=login';</script>";
 			}else {
 			echo "<script>alert('Gagal Input ke DATABASE !');location.href='?page=register';</script>";
@@ -43,5 +44,5 @@ if (isset($_POST['submit']))
 	}
 else
 	// tampilkan kembali form
-	include 'form.php';
+	include 'formregister.php';
 ?> 

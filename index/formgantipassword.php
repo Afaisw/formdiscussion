@@ -1,26 +1,12 @@
 <?php include 'adminPermission.inc'; ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Form</title>
-	<link rel="stylesheet" type="text/css" href="css.css">
-</head>
-<body>
-<div class="box">
-	<a href="logout.php">logout</a>
-	<a href="editprofile.php">Edit Profile</a>
-<h1> Edit Profile </h1>
 <fieldset>
 	<legend>Person Details</legend>
 	<?php
-	$pdo = new PDO ('mysql:host=localhost;dbname=forumdiscussion','root','');
-	$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$query = $pdo->prepare('SELECT * FROM user WHERE id=:id');
+	$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
 	$query->bindValue(':id', $_SESSION['idUser']);
 	$query->execute();
 	$data = $query->fetch();?>
-	<form name="myForm" action="gantipassword.php" method="POST">
+	<form name="myForm" action="?page=changepassword" method="POST">
 		<input type="number" name="id" hidden value="<?php echo $data['id'];?>">
 		<table>
 		<tr>
@@ -44,6 +30,3 @@
 		</table>
 	</form>
 </fieldset>
-</div>
-</body>
-</html>

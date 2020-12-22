@@ -3,35 +3,30 @@ include 'adminPermission.inc';
 $errors = array();
 if (isset($_POST['submit']))
 	{
-		require 'validate2.inc';
-	 	validateAlfabet($errors, $_POST, 'username');
-	 	validateAlfabet($errors, $_POST, 'fullname');
-	 	validateEmail($errors, $_POST, 'email');
-	 	validateNumerik($errors, $_POST, 'nomor');
-	 	validateWajib($errors, $_POST, 'gender');
-	 	validateWajib($errors, $_POST, 'alamat');
-	 	validateWajib($errors, $_POST, 'type');
-	 	validateWajib($errors, $_POST, 'tgl');
-	 	validateAlfanumerik($errors, $_POST, 'password');
-	 	validateConfirm($errors, $_POST, 'password', 'password2');
-	 	if ($errors)
+	require '../config/validate.inc';
+	validateAlfabet($errors, $_POST, 'username');
+	validateAlfabet($errors, $_POST, 'fullname');
+	validateEmail($errors, $_POST, 'email');
+	validateNumerik($errors, $_POST, 'nomor');
+	validateWajib($errors, $_POST, 'gender');
+	validateWajib($errors, $_POST, 'alamat');
+	validateWajib($errors, $_POST, 'type');
+	validateAlfanumerik($errors, $_POST, 'password');
+	validateConfirm($errors, $_POST, 'password', 'password2');
+	if ($errors)
 		{
-	 // tampilkan kembali form
-			include 'formeditprofile.php';
-	 	}
-	 	else
-	 	{	
-	 	$pdo = new PDO ('mysql:host=localhost;dbname=forum','root','');
-		$pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $pdo->prepare('SELECT * FROM user WHERE id=:id and password=:password');
+		// tampilkan kembali form
+		include 'formeditprofile.php';
+		}
+	else
+		{	
+		$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
 		$query->bindValue(':id', $_POST['id']);
-		$query->bindValue(':password', md5($_POST['password']));
 		$query->execute();
 		$data = $query->fetch();
-		if ($data['password'] == md5($_POST['password']))
+		if ($data['PASSWORD'] == hash("sha256", $_POST['password']))
 			{
-			$state = $pdo->prepare("update user set username=:username, fullname=:fullname, email=:email, telp=:telp, gender=:gender, alamat=:alamat, user_type=:user_type, tanggal_lahir=:tanggal_lahir where id=:id and password=:password");
-			$state->bindValue(':id', $_POST['id']);
+			$state = $db->prepare("update tb_user set USERNAME=:username, FULLNAME=:fullname, EMAIL=:email, TELP=:telp, GENDER=:gender, ALAMAT=:alamat, USER_TYPE=:user_type where ID_USER=:id");
 			$state->bindValue(':username', $_POST['username']);
 			$state->bindValue(':fullname', $_POST['fullname']);
 			$state->bindValue(':email', $_POST['email']);
@@ -39,17 +34,16 @@ if (isset($_POST['submit']))
 			$state->bindValue(':gender', $_POST['gender']);
 			$state->bindValue(':alamat', $_POST['alamat']);
 			$state->bindValue(':user_type', $_POST['type']);
-			$state->bindValue(':tanggal_lahir', $_POST['tgl']);
-			$state->bindValue(':password', md5($_POST['password']));
+			$state->bindValue(':id', $_POST['id']);
 			$state->execute();	
 			if ($state)
 				{
-					echo "<script>alert('Data berhasil di update !');location.href='editprofile.php';</script>";
+					echo "<script>alert('Data berhasil di update !');location.href='?page=editprofile';</script>";
 				}
-			}else {
-				echo "<script>alert('password Salah !');location.href='editprofile.php';</script>";
-			}	
-	 	}
+			} else {
+					echo "<script>alert('password salah');location.href='?page=editprofile';</script>";
+				}	
+			}
 	}
 else
 	// tampilkan kembali form
