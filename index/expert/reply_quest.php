@@ -1,27 +1,32 @@
-<?php
+<?php //menampilkan pertanyaan yang sudah diklik
     include 'adminPermission.inc'; 
     $statement = $db->prepare('SELECT a.fullname, b.pertanyaan, b.id_question, b.tanggal_dibuat_question, c.judul FROM `tb_user` a, `tb_question` b, `tb_topik` c WHERE b.id_topik = c.id_topik AND a.id_user=b.id_user AND b.id_question=:id');
     $statement->bindValue(':id', $_GET['id']);
     $statement->execute();
     $data = $statement->fetchAll();
-
+	
     foreach ($data as $row) {
         echo "<h1>{$row['fullname']}</h1>";
         echo "<p>{$row['judul']}"." "."{$row['tanggal_dibuat_question']}</p>";
         echo "<p>{$row['pertanyaan']}</p>";
     }
-
-    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user');
+	//menampilkan jawaban sebelumnya
+    $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban, a.id_answer, a.id_user FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user');
     $query->bindValue(':id', $_GET['id']);
     $query->execute();
 	$data = $query->fetchAll();
+	foreach ($data as $answer) {
+        echo "<h4>{$answer['fullname']}</h4>";
+		echo "<p>{$answer['jawaban']}</p>";
+        echo "<p>{$answer['tanggal_jawaban']}</p>";
+		if ($_SESSION['idUser'] == $answer['id_user']) {?> 
+		<a href="?page=editanswer&id=<?=$answer['id_answer']; ?>">Edit</a>
+	<?php }
 	
-	foreach ($data as $question) {
-        echo "<h4>{$question['fullname']}</h4>";
-        echo "<p>{$question['tanggal_jawaban']}</p>";
-        echo "<p>{$question['jawaban']}</p>";
-    }
+	}
 
+
+	//menginputkan / menambahkan jawaban ke database
     if (isset($_POST['submit'])) {
 		require '../config/validate.inc';
 		validateWajib($errors, $_POST, 'isi');
@@ -37,9 +42,9 @@
 			$state->execute();
 			if ($state)
 			{
-				echo "<script>alert('Balasan Berhasil Diajukan');location.href='?page=reply_quest&id=<?=$id?>';</script>";
+				echo "<script>alert('Balasan Berhasil Diajukan');location.href='?page=reply_quest&id=$id';</script>";
 			} else {
-				echo "<script>alert('Balasan Gagal Diajukan');location.href='?page=reply_quest&id=<?=$id?>';</script>";
+				echo "<script>alert('Balasan Gagal Diajukan');location.href='?page=reply_quest&id=$id';</script>";
 			}	
 		}
 	} else {

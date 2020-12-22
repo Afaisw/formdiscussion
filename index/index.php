@@ -69,6 +69,9 @@ error_reporting(0); //menonaktifkan error log
 				case 'discuss':
 					include 'expert/discuss.php';
 					break;
+				case 'editanswer':
+					include 'expert/edit_answer.php';
+					break;
 				default:
 					# code...
 					break;
