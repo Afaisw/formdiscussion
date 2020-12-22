@@ -18,9 +18,9 @@ if (isset($_POST['submit']))
 		$query->bindValue(':id', $_SESSION['idUser']);
 		$query->execute();
 		$data = $query->fetch();
-		if ($data['PASSWORD'] == hash("sha256",$_POST['passwordlama']))
+		if ($data['PASSWORD'] == hash("sha256",$_POST['passwordlama'])) //pengecekan apakah password yang diinput sama dengan yang ada di database
 			{
-			$state = $db->prepare("update tb_user set PASSWORD:=SHA2(:passwordbaru,0) where ID_USER=:id");
+			$state = $db->prepare("update tb_user set PASSWORD:=SHA2(:passwordbaru,0) where ID_USER=:id"); //mengupdate password lama dengan yang baru
 			$state->bindValue(':passwordbaru', $_POST['passwordbaru']);
 			$state->bindValue(':id', $_SESSION['idUser']);
 			$state->execute();	

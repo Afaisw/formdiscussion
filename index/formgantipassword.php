@@ -2,7 +2,7 @@
 <fieldset>
 	<legend>Person Details</legend>
 	<?php
-	$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
+	$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id'); //select user yang sedang login
 	$query->bindValue(':id', $_SESSION['idUser']);
 	$query->execute();
 	$data = $query->fetch();?>

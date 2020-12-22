@@ -3,8 +3,8 @@
 <fieldset>
 	<legend>Person Details</legend>
 	<form action="?page=register" method="POST">
-		<input class="input-control" type="text" placeholder="Username" name="username" value="<?php if(isset($_POST['submit'])) echo htmlspecialchars($_POST['username'])?>">
-		<?php if(isset($_POST['submit'])) echo $errors['username']?>
+		<input class="input-control" type="text" placeholder="Username" name="username" value="<?php if(isset($_POST['submit'])) echo htmlspecialchars($_POST['username'])?>"> <!-- value berisikan data yang sebelumnya diisi -->
+		<?php if(isset($_POST['submit'])) echo $errors['username'] //menampilkan error jika tidak sesuai dengan validasi?>
 		
 		<input class="input-control" type="text" name="fullname" placeholder="FullName" value="<?php if(isset($_POST['submit'])) echo htmlspecialchars($_POST['fullname'])?>">
 		<?php if(isset($_POST['submit'])) echo $errors['fullname']?>

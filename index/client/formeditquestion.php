@@ -1,11 +1,10 @@
 <?php
-$query = $db->prepare('SELECT * FROM tb_question, tb_topik WHERE tb_question.ID_TOPIK = tb_topik.ID_TOPIK and ID_USER=:id and ID_QUESTION=:id_question');
-$query->bindValue(':id', $_SESSION['idUser']);
+$query = $db->prepare('SELECT * FROM tb_user, tb_question, tb_topik WHERE tb_question.ID_TOPIK = tb_topik.ID_TOPIK and tb_user.ID_USER = tb_question.ID_USER and ID_QUESTION=:id_question'); //select pertanyaan yang sudah diklik di link sebelumnya
 $query->bindValue(':id_question', $_GET['id']);
 $query->execute();
 $data = $query->fetch();
-?>
-<form action="#" method="post">
+if($_SESSION['idUser'] == $data['ID_USER']) {?> <!-- kondisi apakah user yang sedang login sesuai dengan yang menanyakan atau tidak -->
+<form action="#" method="post"> <!-- jika sesuai maka pertanyaan bisa di edit -->
 	<?php 
 		$query = $db->prepare('SELECT * FROM tb_topik');
 		$query->execute();
@@ -21,5 +20,13 @@ $data = $query->fetch();
 		<textarea rows="4" cols="50" name="isi"><?php echo $data['PERTANYAAN'];?></textarea>
 		<?php if(isset($_POST['submit'])) echo $errors['isi']?>
 		<br>
+		<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
 		<input type="submit" name="submit" value="Edit Pertanyaan">
 </form>
+<?php } else { ?> <!-- jika tidak maka hanya menampilkan saja -->
+<li>
+	<h2><?php echo $data['FULLNAME']?></h2>
+	<div class="isi"><?php echo $data['PERTANYAAN'] ?></div>
+	<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
+</li>
+<?php } ?>

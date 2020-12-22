@@ -28,6 +28,7 @@
 		if($errors){
 			include 'formreply.php';
 		} else {
+			$id = $_GET['id'];
 			$state = $db->prepare("insert into tb_answer values (null, :id_user, :id_question, :reply ,:tgl)");
 			$state->bindValue(':id_question', $_GET['id']);
 			$state->bindValue(':id_user', $_SESSION['idUser']);
@@ -36,9 +37,9 @@
 			$state->execute();
 			if ($state)
 			{
-				echo "<script>alert('Balasan Berhasil Diajukan');location.href='?page=reply_quest';</script>";
+				echo "<script>alert('Balasan Berhasil Diajukan');location.href='?page=reply_quest&id=<?=$id?>';</script>";
 			} else {
-				echo "<script>alert('Balasan Gagal Diajukan');location.href='?page=reply_quest';</script>";
+				echo "<script>alert('Balasan Gagal Diajukan');location.href='?page=reply_quest&id=<?=$id?>';</script>";
 			}	
 		}
 	} else {

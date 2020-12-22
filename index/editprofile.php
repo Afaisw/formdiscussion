@@ -3,7 +3,7 @@ include 'adminPermission.inc';
 $errors = array();
 if (isset($_POST['submit']))
 	{
-	require '../config/validate.inc';
+	require '../config/validate.inc'; //validasi perfield yang diinput
 	validateAlfabet($errors, $_POST, 'username');
 	validateAlfabet($errors, $_POST, 'fullname');
 	validateEmail($errors, $_POST, 'email');
@@ -20,13 +20,13 @@ if (isset($_POST['submit']))
 		}
 	else
 		{	
-		$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id');
+		$query = $db->prepare('SELECT * FROM tb_user WHERE ID_USER=:id'); //pengecekan user apakah sama dengan yang ada di database
 		$query->bindValue(':id', $_POST['id']);
 		$query->execute();
 		$data = $query->fetch();
-		if ($data['PASSWORD'] == hash("sha256", $_POST['password']))
+		if ($data['PASSWORD'] == hash("sha256", $_POST['password'])) //apakah memiliki password yang sama atau tidak
 			{
-			$state = $db->prepare("update tb_user set USERNAME=:username, FULLNAME=:fullname, EMAIL=:email, TELP=:telp, GENDER=:gender, ALAMAT=:alamat, USER_TYPE=:user_type where ID_USER=:id");
+			$state = $db->prepare("update tb_user set USERNAME=:username, FULLNAME=:fullname, EMAIL=:email, TELP=:telp, GENDER=:gender, ALAMAT=:alamat, USER_TYPE=:user_type where ID_USER=:id"); //update data
 			$state->bindValue(':username', $_POST['username']);
 			$state->bindValue(':fullname', $_POST['fullname']);
 			$state->bindValue(':email', $_POST['email']);

@@ -1,14 +1,14 @@
 <?php 
-include 'adminPermission.inc';
-require_once('../config/koneksi.php');
-$db = pdo_connect_mysql();
-error_reporting(0);
+include 'adminPermission.inc'; //mengecek apakah ada session atau tidak , apakah user telah login atau tidak agar tidak bisa asal diakses
+require_once('../config/koneksi.php'); //import koneksi database
+$db = pdo_connect_mysql(); //start database
+error_reporting(0); //menonaktifkan error log
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../asset/css.css">
+	<link rel="stylesheet" type="text/css" href="../asset/css.css"> <!-- mengimport css -->
 </head>
 <script type="text/javascript">
 </script>
@@ -18,11 +18,11 @@ error_reporting(0);
 	<div class="menu">
 		<ul>
 			<li><a href="logout.php">Logout</a></li>
-			<?php if ($_SESSION['type'] == 'expert') {?>
+			<?php if ($_SESSION['type'] == 'expert') { //pengecekan apakah user expert atau bukan?> 
 				<li><a href="?page=all_question">Lihat Pertanyaan</a></li>
 				<li><a href="?page=discuss">Diskusi Saya</a></li>
 			<?php } ?>
-			<?php if ($_SESSION['type'] == 'client') {?>
+			<?php if ($_SESSION['type'] == 'client') { //pengecekan apakah user client atau bukan?>
 				<li><a href="?page=v_question">Diskusi</a></li>
 				<li><a href="?page=clientallquestion">Semua Pertanyan</a></li>
 				<li><a href="?page=addtopik">Tambah Topik</a></li>

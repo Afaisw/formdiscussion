@@ -1,10 +1,10 @@
 <?php
 $errors = array();
-if (isset($_POST['submit']))
+if (isset($_POST['submit'])) //jika di klik tombol submit
 	{
 		//validasi data yang diinput
-		require 'config/validate.inc';
-	 	validateAlfabet($errors, $_POST, 'username');
+		require 'config/validate.inc'; //import validasi
+	 	validateAlfabet($errors, $_POST, 'username'); //pengecekan validasi di tiap field sesuai kebutuhan
 	 	validateAlfabet($errors, $_POST, 'fullname');
 	 	validateEmail($errors, $_POST, 'email');
 	 	validateNumerik($errors, $_POST, 'nomor');

@@ -1,7 +1,7 @@
 <?php 
-require_once('config/koneksi.php');
-$db = pdo_connect_mysql();
-/*error_reporting(0);*/
+require_once('config/koneksi.php'); //import konfig database agar tidak berulang menginisiasikan database
+$db = pdo_connect_mysql(); //konek database yang sudah diimport
+error_reporting(0); //mematikan error log
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,11 +20,11 @@ $db = pdo_connect_mysql();
 </div>
 <div class="container">
 <div class="isi">
-	<?php
-	if(isset($_GET['page'])){
-		$page = $_GET['page'];
+	<?php 
+	if(isset($_GET['page'])){ //digunakan untuk tampilan halaman dinamis
+		$page = $_GET['page']; //mengambil id page jika berganti halaman
 		switch ($page) {
-			case 'login':
+			case 'login': //ketika page ke login maka akan mengimport halaman login.php
 				include 'login.php';
 				break;
 			case 'register':
