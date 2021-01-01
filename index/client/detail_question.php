@@ -4,11 +4,13 @@
 	$query->bindValue(':id_question', $_GET['id']);
 	$query->execute();
 	$data = $query->fetch(); ?>
-	<li>
-		<h2><?php echo $data['FULLNAME']?></h2>
+	<li class="list-control">
+		<h3 class="nama"><?php echo $data['FULLNAME']?></h3>
 		<div class="isi"><?php echo $data['PERTANYAAN'] ?></div>
 		<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
-		<a href="?page=editquestion&id=<?=$data['ID_QUESTION']; ?>">Edit</a>
+		<?php if($data['ID_USER'] == $_SESSION['idUser']) { ?>
+		<a class="btn" href="?page=editquestion&id=<?=$data['ID_QUESTION']; ?>">Edit</a>
+		<?php } ?>
 	</li>
 	<!-- menampilkan semua jawaban yang sudah dijawab oleh user terhadap pertanyaan diatas -->
 	<?php
@@ -18,8 +20,8 @@
 	$data = $query->fetchAll();
 	?>
 	<?php foreach ($data as $answer) { ?>
-		<li>
-			<h2><?php echo $answer['FULLNAME']?></h2>
+		<li class="list-control-answer">
+			<h3 class="nama"><?php echo $answer['FULLNAME']?></h3>
 			<div class="isi"><?php echo $answer['JAWABAN'] ?></div>
 			<div class="tanggal"><?php echo $answer['TANGGAL_JAWABAN'] ?></div>
 		</li>

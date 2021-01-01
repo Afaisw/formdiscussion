@@ -4,6 +4,7 @@ $query->bindValue(':id_question', $_GET['id']);
 $query->execute();
 $data = $query->fetch();
 ?> 
+<div class="form-control">
 <form action="#" method="post">
 	<?php 
 		$query = $db->prepare('SELECT * FROM tb_topik'); //menampilkan seluruh topik untuk dipilih
@@ -11,7 +12,7 @@ $data = $query->fetch();
 		$topiks = $query->fetchAll();
 		?>
 		<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
-		<select class="" name="topik">
+		<select class="select-topik" name="topik">
 			<?php foreach($topiks as $topik) { ?>
 				<option value="<?php echo $topik['ID_TOPIK'] ?>" <?php if($data['ID_TOPIK'] == $topik['ID_TOPIK']) { echo "selected"; } ?>><?php echo $topik['JUDUL']?></option>
 			<?php } ?>
@@ -23,3 +24,4 @@ $data = $query->fetch();
 		<div class="tanggal"><?php echo $data['TANGGAL_DIBUAT_QUESTION'] ?></div>
 		<input type="submit" name="submit" value="Edit Pertanyaan">
 </form>
+</div>

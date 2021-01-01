@@ -1,8 +1,6 @@
 <?php
 include 'adminPermission.inc';
 ?>
-
-<ul>
 	<?php
 	if (isset($_POST['submit'])) { // jika tombol submit di klik
 		require '../config/validate.inc'; //validasi perfield yang diinput
@@ -33,12 +31,13 @@ include 'adminPermission.inc';
 	$data = $query->fetchAll();
 	
 	foreach ($data as $question) { ?>
-	<a href="?page=detailquestion&id=<?=$question['ID_QUESTION']; ?>" class="question"> <!-- menampilkan ID pertanyaan yang sudah diselect -->
-		<li>
+<ul>
+	<li class="list-control">
+		<a href="?page=detailquestion&id=<?=$question['ID_QUESTION']; ?>" class="question"> <!-- menampilkan ID pertanyaan yang sudah diselect -->
 			<div class="topik"><?php echo $question['JUDUL']?></div> <!-- menampilkan JUDUL pertanyaan yang sudah diselect -->
 			<div class="isi"><?php echo $question['PERTANYAAN']?></div> <!-- menampilkan pertanyaan yang sudah diselect -->
 			<div class="tanggal"><?php echo $question['TANGGAL_DIBUAT_QUESTION']?></div> <!-- menampilkan tanggal pertanyaan yang sudah diselect -->
-		</li>
-	</a>
-	<?php } ?>
+		</a>
+	</li>
 </ul>
+<?php } ?>

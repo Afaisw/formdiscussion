@@ -1,3 +1,4 @@
+<ul>
 <?php //menampilkan pertanyaan yang sudah diklik
     include 'adminPermission.inc'; 
     $statement = $db->prepare('SELECT a.fullname, b.pertanyaan, b.id_question, b.tanggal_dibuat_question, c.judul FROM `tb_user` a, `tb_question` b, `tb_topik` c WHERE b.id_topik = c.id_topik AND a.id_user=b.id_user AND b.id_question=:id');
@@ -5,22 +6,28 @@
     $statement->execute();
     $data = $statement->fetchAll();
 	
-    foreach ($data as $row) {
-        echo "<h1>{$row['fullname']}</h1>";
-        echo "<p>{$row['judul']}"." "."{$row['tanggal_dibuat_question']}</p>";
-        echo "<p>{$row['pertanyaan']}</p>";
-    }
+	foreach ($data as $row) { ?>
+	<li class="list-control">
+		<h3 class="nama"><?php echo $row['fullname']?></h3>
+		<div class="topik"><?php echo $row['judul']?></div>
+		<div class="isi"><?php echo $row['pertanyaan'] ?></div>
+		<div class="tanggal"><?php echo $row['tanggal_dibuat_question'] ?></div>
+	</li>
+    <?php } 
 	//menampilkan jawaban sebelumnya
     $query = $db->prepare('SELECT c.fullname, a.tanggal_jawaban, a.jawaban, a.id_answer, a.id_user FROM `tb_answer` a, `tb_question` b, `tb_user` c WHERE a.id_question=:id AND a.id_question=b.id_question AND a.id_user=c.id_user ORDER BY a.tanggal_jawaban');
     $query->bindValue(':id', $_GET['id']);
     $query->execute();
 	$data = $query->fetchAll();
-	foreach ($data as $answer) {
-        echo "<h4>{$answer['fullname']}</h4>";
-		echo "<p>{$answer['jawaban']}</p>";
-        echo "<p>{$answer['tanggal_jawaban']}</p>";
-		if ($_SESSION['idUser'] == $answer['id_user']) {?> 
-		<a href="?page=editanswer&id=<?=$answer['id_answer']; ?>">Edit</a>
+	foreach ($data as $answer) { ?>
+	<li class="list-control-answer">
+        <h3 class="nama"><?php echo $answer['fullname']?></h3>
+		<div class="isi"><?php echo $answer['jawaban'] ?></div>
+		<div class="tanggal"><?php echo $answer['tanggal_jawaban'] ?></div>
+		<?php if ($_SESSION['idUser'] == $answer['id_user']) {?> 
+		<a class="btn" href="?page=editanswer&id=<?=$answer['id_answer']; ?>">Edit</a>
+	</li>
+</ul>
 	<?php }
 	
 	}

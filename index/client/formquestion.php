@@ -1,10 +1,11 @@
+<div class="form-control">
 <form action="#" method="post">
 	<?php 
 		$query = $db->prepare('SELECT * FROM tb_topik'); //menampilkan semua topik
 		$query->execute();
 		$topiks = $query->fetchAll();
 		?>
-		<select class="" name="topik">
+		<select class="select-topik" name="topik">
 			<option value="" disabled selected>- Pilih Topik -</option>
 			<?php foreach($topiks as $topik) { ?> <!-- menampilkan topik sudah diselect -->
 				<option value="<?php echo $topik['ID_TOPIK'] ?>"><?php echo $topik['JUDUL']?></option>
@@ -16,3 +17,4 @@
 		<br>
 		<input type="submit" name="submit" value="Ajukan Pertanyaan">
 </form>
+</div>

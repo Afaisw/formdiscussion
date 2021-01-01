@@ -53,5 +53,6 @@
 		<?php if(isset($_POST['submit'])) echo $errors['password2']?>
 		<br>
 		<input type="submit" value="Update" name="submit" class="button">
+		</form>
 </fieldset>
 </div>

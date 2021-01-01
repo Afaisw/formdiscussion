@@ -5,12 +5,13 @@
     $statement->execute();
 	
 	foreach ($statement as $row) { ?> <!-- looping semua data yang sudah diambil di sql sebelumnya, lalu ditampilkan sesuai fieldnya -->
-	<a href="?page=reply_quest&id=<?=$row['id_question']; ?>" class="question">
-		<li>
-			<h1><?php echo $row['fullname']?></h1>
-			<div class="isi"><?php echo $row['judul']." ".$row['tanggal_dibuat_question'] ?></div>
-			<div class="tanggal"><?php echo $row['pertanyaan'] ?></div>
-		</li>
-	</a>
+	<li class="list-control">
+		<a href="?page=reply_quest&id=<?=$row['id_question']; ?>" class="question">
+			<h3 class="nama"><?php echo $row['fullname']?></h3>
+			<div class="topik"><?php echo $row['judul']?></div>
+			<div class="isi"><?php echo $row['pertanyaan'] ?></div>
+			<div class="tanggal"><?php echo $row['tanggal_dibuat_question'] ?></div>
+		</a>
+	</li>
 	<?php } ?>
 </ul>
