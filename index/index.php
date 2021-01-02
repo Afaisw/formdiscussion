@@ -9,12 +9,14 @@ error_reporting(0); //menonaktifkan error log
 <head>
 	<title>Admin</title>
 	<link rel="stylesheet" type="text/css" href="../asset/css.css"> <!-- mengimport css -->
+	<link rel="icon" type="image/png" href="../asset/images/icon.png"/> <!-- logo -->
 </head>
 <body>
 	<div class="container">
 		<div class="kiri">
-			Login As <?php echo $_SESSION['isLogin']?><br>
-			Type User <?php echo $_SESSION['type']?><br>
+			<img class="imgside" src="../asset/images/icon.png"><br>
+			Login As : <?php echo $_SESSION['isLogin']?><br>
+			Type User : <?php echo $_SESSION['type']?><br>
 			<a href="?page=editprofile">Edit Profile</a><br>
 			<a href="?page=changepassword">Change Password</a><br>
 			<a href="logout.php">Logout</a>
@@ -79,6 +81,5 @@ error_reporting(0); //menonaktifkan error log
 			?>
 		</div>
 </div>
-<div class="footer"></div>
 </body>
 </html>

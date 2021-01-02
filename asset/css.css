@@ -1,17 +1,17 @@
-*{
+*{ /* membuat semua menjadi 0 */
 	margin: 0;
 }
-body {
-	margin:0;
-	background-image: url(bg.jpg);
-	background-size: cover;
-	background-attachment: fixed;
-	min-height: 720px;
+body { /* mengatur css pada body */
+	margin:0; /* jarak antara atas bawah kanan dan kiri */
+	background-image: url(images/bg.jpg); /* setting background dengan gambar */
+	background-size: cover; /* membuat ukuran gambar full menutupi page */ 
+	background-attachment: fixed; /* membuat background di posisi fix (tidak bergerak) */
+	min-height: 720px; /* tinggi minimal */
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .header {
-	background: rgba(0,0,0,0.7);
-	padding : 20px;
+	background: rgba(0,0,0,0.7); /* background menggunakan kode hex ditambah alpha (mengatur tingkat transparant) */
+	padding : 20px; /* mengatur jarak antara isi dengan tepi (berbeda dengan margin) */
 	margin: 0;
 }
 .menu {
@@ -21,14 +21,14 @@ body {
 	position: fixed;
 }
 .menu ul li {
-	display: inline-block;
+	display: inline-block; /* mengatur agar membentuk sebuah block dalam satu baris */
 }
 .menu ul li a {
-	text-decoration: none;
+	text-decoration: none; /* menghapus text dekorasi bawaan dari link (a) */
 	padding: 5px 20px;
 	color: black;
 	font-family: Monotype Corsiva;
-	transition: all ease-in-out 0.7s;
+	transition: all ease-in-out 0.7s; /* mengatur efek animasi nantinya jika ada aksi (hover) */
 }
 .menu ul li a:hover{
 	color: #45ADA8;
@@ -41,46 +41,37 @@ body {
 .isi {
 	width: 100%;
 }
-.footer {
-	clear: both;
-	font-size : 10px;
-	background:rgba(0,0,0,0.7);
-	padding : 10px;
-	text-align:center;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-}
 .login {
 	text-align: center;
-	margin:0 auto;
+	margin:150px auto;
 	width: 40%;
 	background: rgba(0,0,0,0.7);
 	padding: 10px;
 	border-radius: 5px;
+	color: #ebffe5;
+	/* membuat box shadow (bayangan berbentuk kotak) */
 	-webkit-box-shadow: 0px 0px 24px -4px rgba(0,0,0,1);
 	-moz-box-shadow: 0px 0px 24px -4px rgba(0,0,0,1);
 	box-shadow: 0px 0px 24px -4px rgba(0,0,0,1);
-	color: #ebffe5;
 }
 .input-control {
-  padding: 5px 5px;
-  margin: 5px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background: transparent;
-  border: none;
-  color: #ecf0f1;
-  border-bottom :1px #747d8c solid;
-  width: 60%;
-  text-align: center;
+	padding: 5px 5px;
+	margin: 5px 0;
+	display: inline-block;
+	border: 1px solid #ccc; /* membuat border */
+	border-radius: 4px; /* membentuk border agar agak melingkar */
+	box-sizing: border-box; 
+	background: transparent;
+	border: none;
+	color: #ecf0f1;
+	border-bottom :1px #747d8c solid;
+	width: 60%;
+	text-align: center;
 }
-input:focus{
+input:focus{ /* mengatur tampilan ketika input sedang aktif (dipilih) */
 	outline: none;
 }
-input[type=submit] {
+input[type=submit] {  /* berlaku untuk semua input yang bertype submit */
   background-color: #45ADA8;
   color: white;
   padding: 5px 20px;
@@ -94,28 +85,29 @@ input[type=submit]:hover {
   background-color: #358581;
 }
 .kiri {
-	float: left;
+	float: left; /* membuat float berada di sebelah kiri */
 	background: rgba(0,0,0,0.8);
 	padding: 10px;
 	border-top-right-radius: 15px ;
 	border-bottom-right-radius: 15px ;
-	width: 30%;
+	width: 20%;
 	min-height: 650px;
 	position: fixed;
 	text-align: center;
+	color: white;
 }
 .kanan {
-	margin: 70px auto;
-	float: right;
+	margin: 70px auto; /* 70px berarti jarak antara atas dan bawah , auto = jarak antara kanan dan kiri (auto berarti akan berada ditengah) */
+	float: right; /* float berada di sebelah kanan */
 	padding: 5px;
 	border-radius: 5px;
-	width: 65%;
+	width: 75%;
 	margin-bottom: 20px;
 }
 a{
 	list-style: none;
 	text-decoration: none;
-	cursor: pointer;
+	cursor: pointer; /* mengubah kursor */
 	color:#45ADA8;
 	transition: all ease-in-out 0.7s;
 }
@@ -147,7 +139,7 @@ ul a li{
 }
 .list-control{
 	background: rgba(0,0,0,0.7);
-	padding: 15px 5px 15px 50px;
+	padding: 15px 5px 15px 50px; /* urutan jarak dari atas - kanan - bawah - kiri */
 	transition: all ease-in-out 0.7s;
 	border-top-right-radius: 80px;
 	border-bottom-right-radius: 80px;
@@ -170,11 +162,11 @@ ul a li{
 	box-shadow: 0px 0px 30px 2px rgba(0,0,0,1);
 }
 .nama {
-	text-transform: capitalize;
+	text-transform: capitalize; /* membuat tulisan berawalan kapital */
 	color: #45ADA8;
 }
 .topik {
-	text-transform: uppercase;
+	text-transform: uppercase; /* menggunakan huruf kapital semua */
 	font-size: x-small;
 	color: white;
 }
@@ -185,7 +177,7 @@ ul a li{
 	color: #45ADA8;
 }
 .tanggal {
-	font-size: xx-small;
+	font-size: xx-small; /* ukuran huruf extra small */
 	text-align: right;
 	color: white;
 	margin: 0 30px 0 0;
@@ -198,4 +190,27 @@ ul a li{
 	margin: 0 0 10px 0;
 	background: transparent;
 	border: none;
+}
+.imgside {
+	width: 200px;
+	height: 170px;
+	margin-top: 150px;
+}
+
+.home {
+	text-align: center;
+}
+
+.desc {
+	font-size: medium;
+	background: rgba(0,0,0,0.7);
+	padding:10px;
+	border-radius: 50px;
+	width: fit-content; /* mengatur lebar sesuai dengan isi konten */
+	color: white;
+	text-transform: capitalize;
+	margin: auto;
+	-webkit-box-shadow: 0px 0px 30px 2px rgba(0,0,0,1);
+	-moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,1);
+	box-shadow: 0px 0px 30px 2px rgba(0,0,0,1);
 }

@@ -8,13 +8,15 @@ error_reporting(0); //mematikan error log
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="asset/css.css">
+	<link rel="icon" type="image/png" href="asset/images/icon.png"/> <!-- logo -->
 </head>
 <body>
 <div class="container">
 	<div class="kiri">
+		<img class="imgside" src="asset/images/icon.png">
 		<h2>NO<br>DAYS<br>OFF !!</h2> <br>
 		<a href="index.php?page=login" class="btn">Login</a> |
-		<a href="index.php?page=register" class="btn">Register</a>
+		<a href="index.php?page=register" class="btn">Register</a><br>
 	</div>
 	<div class="menu">
 		<ul>
@@ -33,13 +35,12 @@ error_reporting(0); //mematikan error log
 					include 'register.php';
 					break;
 				default:
-					# code...
+					include 'home.php';
 					break;
 			}
 		}
 		?>
 	</div>
 </div>
-<div class="footer"></div>
 </body>
 </html>
